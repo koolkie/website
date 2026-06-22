@@ -40,7 +40,7 @@ nav{
     top:0;
     background:rgba(15,23,42,0.9);
     backdrop-filter:blur(10px);
-    z-index:100;
+    z-index: index 100;
 }
 
 .nav-content{
@@ -123,6 +123,30 @@ nav a:hover{
     justify-content:center;
 }
 
+.slide-container{
+    position:relative;
+    width:100%;
+    max-width:620px;
+    min-height:320px;
+    overflow:hidden;
+    border-radius:20px;
+    background:#111827;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+}
+
+.slide.active{
+    opacity:1;
+}
+
 .profile-card{
     width:320px;
     height:320px;
@@ -187,6 +211,70 @@ section{
     background:#334155;
 }
 
+.project-card{
+    cursor:pointer;
+}
+
+.modal-overlay {
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:1000;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease-in-out;
+}
+
+.modal-overlay.active {
+    opacity:1;
+    pointer-events:auto;
+}
+
+.modal-content {
+    width:100%;
+    max-width:900px;
+    min-height:70vh;
+    background:#0f172a;
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+}
+
+.close-btn {
+    position:absolute;
+    top:18px;
+    right:18px;
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:rgba(15,23,42,.95);
+    color:#fff;
+    font-size:1.3rem;
+    cursor:pointer;
+}
+
+.close-btn:hover {
+    background:#111827;
+}
+
+.modal-iframe {
+    width:100%;
+    height:calc(100vh - 100px);
+    border:none;
+}
+
+@media(max-width:768px){
+    .modal-iframe {
+        height:calc(100vh - 80px);
+    }
+}
+
 .project-content{
     padding:20px;
 }
@@ -226,6 +314,12 @@ section{
     text-decoration:none;
 }
 
+.container img{
+    width:100%;
+    height:auto;
+    object-fit:cover;
+}
+
 footer{
     text-align:center;
     padding:30px;
@@ -259,6 +353,7 @@ footer{
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#Leadership & Volunteering">Leadership & Volunteering</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -270,28 +365,35 @@ footer{
 
         <div class="hero-text">
             <h1>Kevin Chung</h1>
-            <h2>Data Scientist | Data Science Graduate</h2>
-
+            <h2>Aspiring Data Scientist | Data Science Graduate</h2>
             <p>
                 Utilizing large datasets into actionable insights through
                 analytics, visualization, and statistical modeling.
             </p>
-
             <a href="#projects" class="btn primary">View Projects</a>
             <a href="resume.pdf" class="btn secondary">Download Resume</a>
         </div>
 
-        <div class="photo-grid">
-            <div class="Photo-card reveal">
-                <img src= "images/parking_Mmap.png" alt = "Project Image" style="width:100%; height:100%; object-fit:cover; border-radius:20px;">
-            </div>
-
+        <div class="slide-container">
+            <img class="slide active" src="images/parking-ptukey.jpg" alt="Project 1">
+            <img class="slide" src="images/parking_Mmap.png" alt="Project 2">
+            <img class="slide" src="images/patient-intake-mapping.jpg" alt="Project 3">
         </div>
-
-    
-
+        </div>
     </div>
 </section>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length > 1) {
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3500);
+    }
+</script>
 
 <section id="about" class="about">
     <div class="container">
@@ -315,26 +417,24 @@ footer{
 
             <div class="skill-card">
                 <h3>Programming</h3>
-                <p>Python, R, SQL, JavaScript</p>
+                <p>Python, R, SQL, JavaScript, HTML, CSS, Java, C++</p>
             </div>
             <div class = "skill-card">
                 <h3>Packages</h3>
-                <p>Pandas, NumPy, Scikit-learn, seaborn, anova</p>
+                <p>Pandas, NumPy, Scikit-learn, seaborn, folium, geopy</p>
             </div>
             
             <div class="skill-card">
                 <h3>Visualization</h3>
-                <p>Power BI, Tableau, Excel, Matplotlib, </p>
+                <p>Power BI, Tableau, Excel, Matplotlib </p>
             </div>
-
             <div class="skill-card">
                 <h3>Statistics</h3>
-                <p>Random forest, Anova testing, Regression, Classification, Hypothesis Testing</p>
+                <p>Random forest, Anova testing, Regressions, Classifications, Hypothesis Testing</p>
             </div>
-
             <div class="skill-card">
-                <h3>Tools</h3>
-                <p>Git, Jupyter notebook, VS Code</p>
+                <h3>Tools & operating systems</h3>
+                <p>Git, Jupyter notebook, VS Code, Ubuntu, Linux, Windows</p>
             </div>
 
         </div>
@@ -348,19 +448,22 @@ footer{
 
         <div class="projects-grid">
 
-            <div class="project-card">
-                <div class="project-image"></div>
-
+            <div class="project-card" data-link="Projects/heatmap.html">
+                <div class="project-image">
+                    <img class="container img" src="images/patient-intake-mapping.jpg" alt="Project 2">
+                </div>
                 <div class="project-content">
                     <h3>EyeWest Vision patient mapping</h3>
                     <p>
-                        Interactive heatmap of patient  distribution across Canada.
+                        Interactive heatmap of patient distribution across Canada.
                     </p>
                 </div>
             </div>
 
             <div class="project-card">
-                <div class="project-image"></div>
+                <div class="project-image">
+                    <img class="container img" src="images/parking-ptukey.jpg" alt="Project 1">
+                </div>
 
                 <div class="project-content">
                     <h3>Downtown Parking Analysis</h3>
@@ -372,13 +475,16 @@ footer{
             </div>
 
             <div class="project-card">
-                <div class="project-image"></div>
+                <div class="project-image">
+                    <img class = "container img" src="images/Bank history.jpg" alt="Project 3">
+                </div>
 
                 <div class="project-content">
                     <h3>Customer risk datastory telling project</h3>
                     <p>
-                        Presentation on how customer risk is determined based on various factors creating a logit model and random forest model to predict customers defaulting on their payments.
-                
+                        Presentation on how customer risk is determined based 
+                        on various factors creating a logit model and 
+                        random forest model to predict customers defaulting on their payments.
                     </p>
                 </div>
             </div>
@@ -386,6 +492,21 @@ footer{
         </div>
     </div>
 </section>
+
+<div class="modal-overlay" id="projectModal">
+    <div class="modal-content">
+        <button class="close-btn" id="projectModalClose">&times;</button>
+        <iframe class="modal-iframe" id="projectModalFrame" src="" title="Project preview"></iframe>
+    </div>
+</div>
+
+<section id="Leadership & Volunteering">
+    <div class="container">
+
+        <h2 class="section-title">Leadership & Volunteering</h2>
+    <div>
+</section>
+
 
 <section id="experience">
     <div class="container">
@@ -396,19 +517,27 @@ footer{
 
             <div class="timeline-item">
                 <h3>Ophthalmic Technician</h3>
-                <p>2025 - Present</p>
+                <p>2025 - 2026</p>
                 <p>
                     Conduct diagnostic testing, maintain patient records,
                     and ensure data accuracy.
                 </p>
             </div>
-
             <div class="timeline-item">
-                <h3>Data Science Graduate</h3>
-                <p>University Graduate</p>
+                <h3>Kitchen staff</h3>
+                <p>Danbo ramen</p>
+                <p>2024 - 2025</p>
                 <p>
-                    Focused on statistical modeling, analytics,
-                    machine learning, and business intelligence.
+                    Collaborated with team members to prepare and serve meals, ensuring quality and efficiency in a fast-paced environment.
+                </p>
+            </div>
+            <div class="timeline-item">
+                <h3>Receptionist</h3>
+                <p>Metrowtown Mazda</p>
+                <p>2023 - 2024</p>
+                <p>
+                    Managed customer inquiries, scheduled appointments,
+                    and maintained accurate records.
                 </p>
             </div>
 
@@ -426,9 +555,9 @@ footer{
         <p>Let's connect and discuss opportunities.</p>
 
         <div class="contact-links">
-            <a href="#">LinkedIn</a>
-            <a href="#">GitHub</a>
-            <a href="#">Email</a>
+            <a href="https://www.linkedin.com/in/kevin0chung-datasc/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/koolkie" target="_blank">GitHub</a>
+            <a href="mailto:Kevin.chung525@gmail.com">Kevin.chung525@gmail.com</a>
         </div>
 
     </div>
@@ -438,6 +567,31 @@ footer{
 <footer>
     <p>© 2026 Kevin Chung | Data Science Portfolio</p>
 </footer>
+
+<script>
+    const projectModal = document.getElementById('projectModal');
+    const projectModalFrame = document.getElementById('projectModalFrame');
+    const projectModalClose = document.getElementById('projectModalClose');
+
+    document.querySelectorAll('.project-card[data-link]').forEach(card => {
+        card.addEventListener('click', () => {
+            const url = card.dataset.link;
+            if (!url) return;
+            projectModalFrame.src = url;
+            projectModal.classList.add('active');
+        });
+    });
+
+    const closeProjectModal = () => {
+        projectModal.classList.remove('active');
+        projectModalFrame.src = '';
+    };
+
+    projectModalClose.addEventListener('click', closeProjectModal);
+    projectModal.addEventListener('click', event => {
+        if (event.target === projectModal) closeProjectModal();
+    });
+</script>
 
 </body>
 </html>
