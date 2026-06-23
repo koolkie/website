@@ -108,6 +108,10 @@ nav a:hover{
     font-weight:600;
 }
 
+.btn:hover{
+    opacity:.9;
+}
+
 .primary{
     background:#38bdf8;
     color:black;
@@ -138,7 +142,9 @@ nav a:hover{
     inset:0;
     width:100%;
     height:100%;
-    object-fit:contain;
+    object-fit:cover;
+    object-position:center;
+    display:block;
     opacity:0;
     transition:opacity 1s ease-in-out;
 }
@@ -168,6 +174,15 @@ section{
     font-size:2.5rem;
 }
 
+.section-subtitle{
+    text-align:center;
+    color:#cbd5e1;
+    margin-top:-50px;
+    margin-bottom:30px;
+    font-size:1.1rem;
+    font-weight:400;
+}
+
 .about{
     background:#111827;
 }
@@ -183,6 +198,38 @@ section{
     padding:25px;
     border-radius:12px;
     transition:.3s;
+}
+
+.volunteer-card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:12px;
+    transition:.3s;
+}
+
+.volunteer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+.volunteer-card:hover{
+    transform:translateY(+5px);
+}
+.volunteer-image{
+    height:220px;
+    background:#334155;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.volunteer-image img {
+    width:auto;
+    max-width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center;
+    display:block;
 }
 
 .skill-card:hover{
@@ -207,8 +254,16 @@ section{
 }
 
 .project-image{
-    height:180px;
+    height:220px;
     background:#334155;
+    overflow:hidden;
+}
+
+.project-image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
 .project-card{
@@ -287,6 +342,12 @@ section{
     color:#cbd5e1;
 }
 
+.picture{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
 .timeline{
     max-width:800px;
     margin:auto;
@@ -319,6 +380,7 @@ section{
     height:auto;
     object-fit:cover;
 }
+
 
 footer{
     text-align:center;
@@ -371,7 +433,7 @@ footer{
                 analytics, visualization, and statistical modeling.
             </p>
             <a href="#projects" class="btn primary">View Projects</a>
-            <a href="resume.pdf" class="btn secondary">Download Resume</a>
+            <a href="resume/Kevin_Chung_Resume.pdf" class="btn secondary" target="_blank" rel="noopener">Download Resume</a>
         </div>
 
         <div class="slide-container">
@@ -445,12 +507,12 @@ footer{
     <div class="container">
 
         <h2 class="section-title">Projects</h2>
-
+        <h3 class="section-subtitle">Click on the project to view more details</h3>
         <div class="projects-grid">
 
             <div class="project-card" data-link="Projects/heatmap.html">
                 <div class="project-image">
-                    <img class="container img" src="images/patient-intake-mapping.jpg" alt="Project 2">
+                    <img class="container img" src="images/patient-intake-mapping.jpg" alt="Project 1">
                 </div>
                 <div class="project-content">
                     <h3>EyeWest Vision patient mapping</h3>
@@ -460,21 +522,21 @@ footer{
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-link="Projects/Cmpt 353 Final Project report.pdf">
                 <div class="project-image">
-                    <img class="container img" src="images/parking-ptukey.jpg" alt="Project 1">
+                    <img class="container img" src="images/parking-ptukey.jpg" alt="Project 2">
                 </div>
 
                 <div class="project-content">
                     <h3>Downtown Parking Analysis</h3>
                     <p>
-                        Interactive dashboard exploring areas of parking tickets and
-                        usage patterns.
+                        Analysis of parking data in downtown Vancouver to identify
+                        trends and patterns in parking availability and usage.
                     </p>
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card" data-link="Projects/Final Presentation.pdf">
                 <div class="project-image">
                     <img class = "container img" src="images/Bank history.jpg" alt="Project 3">
                 </div>
@@ -504,6 +566,40 @@ footer{
     <div class="container">
 
         <h2 class="section-title">Leadership & Volunteering</h2>
+            <p class="section-subtitle">
+                I have been actively involved in Scouts Canada as a Cub Leader where we guide youths,
+                and participate in outdoor activities, and community service.
+            </p>
+        <div class = "container">
+            <div class="volunteer-grid">
+                
+                <div class="volunteer-card">
+                    <div class="volunteer-image">
+                        <img src="images/CampByng.JPG" alt="Volunteer 1">
+                    </div>
+                    <div class="volunteer-content">
+                        <h3>Scouts Camp Byng Volunteer</h3>
+                        <p>
+                            Assisted in organizing events and activities for children and families, providing support and creating a positive environment.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="volunteer-card">
+                    <div class="volunteer-image ">
+                        <img src="images/Kub Kars.jpg" alt="Volunteer 2">
+                    </div>
+                    <div class="volunteer-content">
+                        <h3>Kub Kar race</h3>
+                        <p>
+                            Led Cubs ages (8-10) in building their own wooden cars and racing them down a track,
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     <div>
 </section>
 
@@ -555,7 +651,7 @@ footer{
         <p>Let's connect and discuss opportunities.</p>
 
         <div class="contact-links">
-            <a href="https://www.linkedin.com/in/kevin0chung-datasc/" target="_blank">LinkedIn</a>
+            <a href="https://linkedin.com/in/kevin-chung-datasc" target="_blank">LinkedIn</a>
             <a href="https://github.com/koolkie" target="_blank">GitHub</a>
             <a href="mailto:Kevin.chung525@gmail.com">Kevin.chung525@gmail.com</a>
         </div>
